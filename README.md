@@ -25,7 +25,7 @@ Make Sure to have DESSCA.py in the same folder as its application file
 import numpy as np
 from DESSCA import dessca_model
 my_dessca_instance0 = dessca_model(box_constraints=[[-1, 1],
-                                                   [-1, 1]],
+                                                    [-1, 1]],
                                    state_names=["x1", "x2"],
                                    bandwidth=0.5)
 ```
@@ -44,3 +44,4 @@ my_dessca_instance0.update_coverage_pdf(data=np.transpose(samples_2d))
 my_dessca_instance0.plot_scatter()
 ```
 
+![](Figures/Scatter0)
