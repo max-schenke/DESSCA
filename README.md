@@ -68,7 +68,7 @@ print(next_sample_suggest)
 ```
 
 Output:
-[0.99377672 0.97026156] 
+[0.85517754 0.94340648]
 (Note: results are a little random in scenarios with very few samples)
 
 As was to be expected, the suggestion is in the upper right corner of the state space.
