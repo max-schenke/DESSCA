@@ -1,9 +1,11 @@
 # DESSCA
 **D**ensity **E**stimation-based **S**tate-**S**pace **C**overage **A**cceleration
 
-The provided DESSCA algorithm was designed to aid the state space exploration in reinforcement learning applications.
+The provided DESSCA algorithm was designed to aid the state-space exploration in reinforcement learning applications.
 In many cases where standard exploring starts may be used, 
 the degree of freedom that is provided by the initial state can be utilized to a better extent when using DESSCA instead.
+While regular, unsupervised exploring starts often lead to an unfavorable distribution of sample points in the state space, since the underlying system dynamics typically has particularly attractive regions, DESSCA analyzes the previous sample distribution and explores at the beginning of an episode targeted regions which are underrepresented compared to a target probability density distribution.
+
 Suggestions or experiences concerning applications of DESSCA outside reinforcement learning are welcome!
 
 ## Citing
@@ -59,7 +61,7 @@ Output:
 
 ![](Figures/Heatmap0.png)
 
-The coverage pdf is updated with the given distribution.
+The coverage probability density function (PDF) is updated with the given distribution.
 DESSCA can now suggest where to place the next sample.
 
 ```
