@@ -9,25 +9,8 @@ from tensorflow.keras.optimizers import Adam
 from rl.agents import DDPGAgent
 from rl.memory import SequentialMemory
 from rl.random import OrnsteinUhlenbeckProcess
-import sys
-
 
 use_dessca = False
-# state_constraints = [[ -1.2,  0.6],
-#                      [-0.07, 0.07]]
-#
-# state_low = np.array(state_constraints)[:, 0]
-# state_high = np.array(state_constraints)[:, 1]
-#
-# initial_states = []
-# for _ in range(1000):
-#     state = np.random.uniform(low=state_low, high=state_high)
-#     initial_states.append(state)
-# initial_states = np.transpose(np.array(initial_states)).squeeze()
-# data = {"initial_states": initial_states.tolist()}
-#
-# with open("ValidationInits.json", 'w') as json_file:
-#     data = json.dump(data, json_file)
 
 
 with open("ValidationInits.json", 'r') as json_file:
@@ -99,7 +82,8 @@ class mountain_car_reset_wrapper(Wrapper):
         with open('./' + experiment + "/" + experiment + '_Validation_' + str(self.try_nb) + '.json', 'w') as json_file:
             json.dump(save_dict, json_file)
 
-for i in range(50):
+nb_agents = 50
+for i in range(nb_agents):
 
     env = gym.make('MountainCarContinuous-v0')
     env = mountain_car_reset_wrapper(env, i)
@@ -170,5 +154,6 @@ for i in range(50):
                          verbose=0,
                          visualize=False,
                          nb_max_episode_steps=500)
-    print(f"Done with Agent {i} / 49")
+
+    print(f"Done with Agent {i} / {nb_agents-1}")
     env.close()

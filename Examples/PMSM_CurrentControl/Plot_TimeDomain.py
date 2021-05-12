@@ -1,9 +1,6 @@
 import h5py
 import matplotlib.pyplot as plt
-from matplotlib.collections import LineCollection
 import numpy as np
-import pandas as pd
-import pickle
 import os
 
 if __name__ == "__main__":
@@ -13,7 +10,6 @@ if __name__ == "__main__":
 
     #file_name = "training"
     file_name = "validation"
-    #file_name = "step_episode"
 
     nb = 0
     most_recent = 0

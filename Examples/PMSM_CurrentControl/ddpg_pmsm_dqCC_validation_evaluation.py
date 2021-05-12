@@ -3,7 +3,6 @@ import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 import h5py
-from DESSCA_v1 import dessca_model
 import os
 import sys
 
@@ -63,7 +62,7 @@ plt.xticks([0, 0.5], [r"$\mathrm{ES}$", r"$\mathrm{DESSCA}$"])
 plt.ylabel(r"$g / g_\mathrm{max}$")
 plt.tick_params(axis='both', direction="in", left=True, right=True, bottom=True, top=True)
 
-plotName = '../Plots/' + "CurrentControl_Boxplots" + '.pdf'
+plotName = "CurrentControl_Boxplots" + '.pdf'
 plt.savefig(plotName, bbox_inches='tight')
 plt.close()
 

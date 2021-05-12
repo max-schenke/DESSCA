@@ -2,11 +2,9 @@ import json
 import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
-from DESSCA_v1 import dessca_model
+import os, sys
+sys.path.append("../..")
+from DESSCA import dessca_model
 
 from matplotlib import rc
 rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
@@ -116,7 +114,7 @@ plt.xticks([0, 0.5], [r"$\mathrm{ES}$", r"$\mathrm{DESSCA}$"])
 plt.ylabel(r"$g / g_\mathrm{max}$")
 plt.tick_params(axis='both', direction="in", left=True, right=True, bottom=True, top=True)
 
-plotName = '../Plots/' + "CP_Boxplots" + '.pdf'
+plotName = "CP_Boxplots" + '.pdf'
 plt.savefig(plotName, bbox_inches='tight')
 plt.close()
 

@@ -22,14 +22,14 @@ from gym.spaces import Box, Tuple
 import h5py
 from pathlib import Path
 import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
+sys.path.append("../..")
 from DESSCA import dessca_model
 
 from multiprocessing import Pool
 
-use_dessca = True
+
+use_dessca = False
+
 
 # globals:
 i_n = 230

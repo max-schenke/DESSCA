@@ -14,13 +14,13 @@ from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 from multiprocessing import Pool
 import tensorflow as tf
 
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
-from DESSCA_v1 import dessca_model
+import os, sys
+sys.path.append("../..")
+from DESSCA import dessca_model
 
-use_dessca = True
+
+use_dessca = False
+
 
 class cartpole_reset_wrapper(Wrapper):
 

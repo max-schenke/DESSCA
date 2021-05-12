@@ -21,15 +21,11 @@ from gym.core import Wrapper
 from gym.spaces import Box, Tuple
 import h5py
 from pathlib import Path
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
-from DESSCA_v1 import dessca_model
-import random
 from multiprocessing import Pool
 
+
 use_dessca = True
+
 
 # globals:
 i_n = 230

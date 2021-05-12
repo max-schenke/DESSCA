@@ -7,7 +7,7 @@ import time
 
 from DESSCA import dessca_model
 my_dessca_instance0 = dessca_model(box_constraints=[[-1, 1],
-                                                   [-1, 1]],
+                                                    [-1, 1]],
                                    state_names=["x1", "x2"],
                                    bandwidth=0.5)
 
@@ -46,7 +46,7 @@ my_dessca_instance0.plot_heatmap()
 # The scatter plots can also be rendered in an online fashion (100 samples):
 
 my_dessca_instance1 = dessca_model(box_constraints=[[-1, 1],
-                                                   [-1, 1]],
+                                                    [-1, 1]],
                                   state_names=["x1", "x2"],
                                   bandwidth=0.1,
                                   render_online=True)

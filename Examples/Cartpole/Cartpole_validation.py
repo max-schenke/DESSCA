@@ -11,11 +11,9 @@ from rl.agents import DQNAgent
 from rl.memory import SequentialMemory
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
-from DESSCA_v1 import dessca_model
+import sys
+sys.path.append("../..")
+from DESSCA import dessca_model
 
 state_constraints = [[  - 1.0,    1.0], #+- 2.4
                      [     -7,      7],

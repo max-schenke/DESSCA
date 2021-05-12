@@ -12,13 +12,14 @@ from rl.agents import DDPGAgent
 from rl.memory import SequentialMemory
 from rl.random import OrnsteinUhlenbeckProcess
 
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
-from DES3SCA_v1 import dessca_model
+import sys
+sys.path.append("../..")
+from DESSCA import dessca_model
+
 
 use_dessca = True
+
+
 class mountain_car_reset_wrapper(Wrapper):
 
     def __init__(self, environment, try_nb):
@@ -32,7 +33,7 @@ class mountain_car_reset_wrapper(Wrapper):
             self.dessca_model = dessca_model(box_constraints=[[ -1.2,  0.6],
                                                               [-0.07, 0.07]],
                                              state_names=["position", "velocity"],
-                                             buffer_size=6000)
+                                             )
 
     def step(self, action):
         state, reward, done, _ = self.env.step(action)
@@ -85,7 +86,7 @@ class mountain_car_reset_wrapper(Wrapper):
             "reward_history": self._episode_reward_list
         }
         if use_dessca:
-            experiment = "Dessca_Buf"
+            experiment = "Dessca"
         else:
             experiment = "Uniform"
 
@@ -163,10 +164,9 @@ for i in range(50):
     )
 
     if use_dessca:
-        experiment = "Dessca_Buf"
+        experiment = "Dessca"
     else:
         experiment = "Uniform"
 
     agent.save_weights(filepath="./" + experiment + "/" + experiment + "_weights_" + str(i) + ".hdf5", overwrite=True)
-
     env.close()
