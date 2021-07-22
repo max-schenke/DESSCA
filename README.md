@@ -1,6 +1,8 @@
 # DESSCA
 **D**ensity **E**stimation-based **S**tate-**S**pace **C**overage **A**cceleration
 
+[Read the Paper](https://arxiv.org/abs/2105.08990?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+arxiv%2FQSXk+%28ExcitingAds%21+cs+updates+on+arXiv.org%29)
+
 The provided DESSCA algorithm was designed to aid the state-space exploration in reinforcement learning applications.
 In many cases where standard exploring starts may be used, 
 the degree of freedom that is provided by the initial state can be utilized to a better extent when using DESSCA instead.
@@ -14,7 +16,14 @@ An in-depth explanation of the principle, realization and improvement capabiliti
 Please cite it when using the provided code:
 
 ```
-PLACEHOLDER FOR BIBTEX SOURCE
+@misc{schenke2021improved,
+      title={Improved Exploring Starts by Kernel Density Estimation-Based State-Space Coverage Acceleration in Reinforcement Learning}, 
+      author={Maximilian Schenke and Oliver Wallscheid},
+      year={2021},
+      eprint={2105.08990},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
 ```
 
 ## Usage
