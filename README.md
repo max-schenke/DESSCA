@@ -56,7 +56,6 @@ my_dessca_instance0.plot_scatter()
 ```
 
 Output:
-
 ![](Figures/Scatter0.png)
 
 And a corresponding coverage heatmap
@@ -67,7 +66,6 @@ my_dessca_instance0.plot_heatmap()
 ```
 
 Output:
-
 ![](Figures/Heatmap0.png)
 
 The coverage probability density function (PDF) is updated with the given distribution.
@@ -91,7 +89,6 @@ my_dessca_instance0.plot_scatter()
 ```
 
 Output:
-
 ![](Figures/Scatter1.png)
 
 Let's have a look at the density:
@@ -101,7 +98,6 @@ my_dessca_instance0.plot_heatmap()
 ```
 
 Output:
-
 ![](Figures/Heatmap1.png)
 
 ### More Features
@@ -119,7 +115,6 @@ for _ in range(100):
 ```
 
 Output:
-
 ![](Figures/DESSCA_default.gif)
 
 Further, we can parameterize a memory buffer to only memorize a limited number of past samples:
@@ -138,7 +133,6 @@ for _ in range(100):
 ```
 
 Output:
-
 ![](Figures/DESSCA_buffer.gif)
 
 See how forgetting past samples leads to a group of samples in a similar area?
@@ -164,7 +158,6 @@ for _ in range(100):
 ```
 
 Output:
-
 ![](Figures/DESSCA_reference.gif)
 
 DESSCA can also be used for downsampling. Let's firstly find a large dataset that we would like to reduce in size:
@@ -183,7 +176,6 @@ my_dessca_instance4.plot_scatter()
 ```
 
 Output:
-
 ![](Figures/Scatter2.png)
 
 Now, DESSCA can be used to reduce the set down to a specified number of remaining samples while trying to preserve the original distribution:
@@ -199,7 +191,6 @@ my_dessca_instance5.plot_scatter()
 ```
 
 Output:
-
 ![](Figures/Scatter3.png)
 
 Comparing the edge distributions, it can be seen that they are still almost the same despite removing 90 % of the dataset's content.
