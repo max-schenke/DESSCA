@@ -62,6 +62,7 @@ class dessca_model:
         self.nb_datapoints = 0
         self.coverage_pdf = None
 
+
     def update_coverage_pdf(self, data):
         if self.render_online:
             self.render_scatter(online_data=data)
@@ -89,10 +90,6 @@ class dessca_model:
             _noisy = _tiled + np.random.normal(0, 1, np.shape(_tiled))
             self.coverage_pdf = kale.KDE(dataset=_noisy, bandwidth=self.bandwidth)
 
-    def _residual_coverage(self, X):
-        # cost function for the optimization
-        return
-
     def sample_optimally(self):
         # check if this is the first sample
         if self.coverage_pdf is not None:
@@ -101,21 +98,56 @@ class dessca_model:
                           - self.reference_pdf(np.transpose(X)),
                 iters=self.dim * 10 + 5,
                 verbose=False)
-            self.optimizer.reset()
 
         else:
-            # if this is the first sample, the optimal sample is solely based on the residual coverage
+            # if this is the first sample, the optimal sample is solely based on the reference coverage
             _, self.suggested_sample = self.optimizer.optimize(lambda X: - self.reference_pdf(np.transpose(X)),
                                                                iters=self.dim * 10 + 5,
                                                                verbose=False)
-            self.optimizer.reset()
+        self.optimizer.reset()
 
         return self.suggested_sample
+
+    def downsample(self, data, target_size):
+        # this function samples down a large dataset while preserving the original distribution
+        if self.render_online:
+            print("The render_online feature is not yet available for this function.")
+
+        self.coverage_data = np.copy(data)
+        dataset_size = np.shape(self.coverage_data)[1]
+        self.reference_pdf = kale.KDE(dataset=self.coverage_data, bandwidth=self.bandwidth)
+
+        _, suggested_sample = self.optimizer.optimize(
+            lambda X: - self.reference_pdf.density(np.transpose(X), probability=True)[1],
+            iters=self.dim * 10 + 5,
+            verbose=False)
+        distances = np.linalg.norm(np.add(np.transpose([suggested_sample]), -self.coverage_data), axis=0)
+        removal_idx = np.argmin(distances)
+        self.coverage_data = np.delete(self.coverage_data, removal_idx, 1)
+        dataset_size -= 1
+        self.coverage_pdf = kale.KDE(dataset=self.coverage_data, bandwidth=self.bandwidth)
+        self.optimizer.reset()
+
+
+        while dataset_size > target_size:
+            _, suggested_sample = self.optimizer.optimize(
+                lambda X: self.reference_pdf.density(np.transpose(X), probability=True)[1]
+                          - self.coverage_pdf.density(np.transpose(X), probability=True)[1],
+                iters=self.dim * 10 + 5,
+                verbose=False)
+            distances = np.linalg.norm(np.add(np.transpose([suggested_sample]), -self.coverage_data), axis=0)
+            removal_idx = np.argmin(distances)
+            self.coverage_data = np.delete(self.coverage_data, removal_idx, 1)
+            dataset_size -= 1
+            self.coverage_pdf = kale.KDE(dataset=self.coverage_data, bandwidth=self.bandwidth)
+            self.optimizer.reset()
+
 
     def update_and_sample(self, data=None):
         if data is not None:
             self.update_coverage_pdf(data=data)
         return self.sample_optimally()
+
 
     def plot_heatmap(self, resolution=100, **kwargs):
         if self.dim == 1:
@@ -232,6 +264,7 @@ class dessca_model:
                             self.scatter_axes[i, j].set_xlabel(self.state_names[j])
                         if j == 0:
                             self.scatter_axes[i, j].set_ylabel(self.state_names[i])
+
                         self.scatter_axes[i, j].grid(True)
                         self.scatter_axes[i, j].set_aspect((self.upper_bound[j]
                                                             - self.lower_bound[j]
@@ -248,6 +281,10 @@ class dessca_model:
                                                             - self.lower_bound[j]
                                                             + 2 * _j_margin)
                                                            / (1.2))
+
+                        if i == self.dim - 1:
+                            plt.xlabel(self.state_names[i])
+
                     elif j > i:
                         self.scatter_axes[i, j].remove()
 
