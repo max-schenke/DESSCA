@@ -166,3 +166,40 @@ for _ in range(100):
 Output:
 
 ![](Figures/DESSCA_reference.gif)
+
+DESSCA can also be used for downsampling. Let's firstly find a large dataset that we would like to reduce in size:
+
+```
+x1_samples = np.random.triangular(-1, 0.75, 1, size=(1000, 1))
+x2_samples = np.random.triangular(-1, -0.75, 1, size=(1000, 1))
+samples_2d = np.append(x1_samples, x2_samples, axis=1)
+
+my_dessca_instance4 = dessca_model(box_constraints=[[-1, 1],
+                                                    [-1, 1]],
+                                   state_names=["x1", "x2"],
+                                   bandwidth=0.5)
+my_dessca_instance4.update_coverage_pdf(data=np.transpose(samples_2d))
+my_dessca_instance4.plot_scatter()
+```
+
+Output:
+
+![](Figures/Scatter2.png)
+
+Now, DESSCA can be used to reduce the set down to a specified number of remaining samples while trying to preserve the original distribution:
+
+```
+my_dessca_instance5 = dessca_model(box_constraints=[[-1, 1],
+                                                    [-1, 1]],
+                                   state_names=["x1", "x2"],
+                                   bandwidth=0.5)
+
+my_dessca_instance5.downsample(data=np.transpose(samples_2d), target_size=100)
+my_dessca_instance5.plot_scatter()
+```
+
+Output:
+
+![](Figures/Scatter3.png)
+
+Comparing the edge distributions, it can be seen that they are still almost the same despite removing 90 % of the dataset's content.
