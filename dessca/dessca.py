@@ -41,7 +41,7 @@ class dessca_model:
 
         if reference_pdf is None:
             # if no referece_pdf has been defined we assume uniform distribution on the axes
-            _state_space_volume = np.product([_con[-1] - _con[0] for _con in box_constraints])
+            _state_space_volume = np.prod([_con[-1] - _con[0] for _con in box_constraints])
             def uniform_pdf(X):
                 return 1 / _state_space_volume
             self.reference_pdf = uniform_pdf
