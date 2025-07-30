@@ -28,13 +28,16 @@ Please cite it when using the provided code:
 
 ## Usage
 
-This code snippet serves as a minimal usage example to DESSCA.
-Firstly, import the dessca_model from DESSCA.py and create a corresponding object.
-Make Sure to have DESSCA.py in the same folder as its application file
+This code snippet serves as a minimal usage example to DESSCA. 
+Firstly, install DESSCA:
+```
+pip install dessca
+```
+Secondly, import the dessca_model and create a corresponding object.
 
 ```
 import numpy as np
-from DESSCA import dessca_model
+from dessca import dessca_model
 my_dessca_instance0 = dessca_model(box_constraints=[[-1, 1],
                                                     [-1, 1]],
                                    state_names=["x1", "x2"],
